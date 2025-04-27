@@ -12,8 +12,6 @@
 5. [Roadmap](#roadmap)
 6. [Quick Start](#quick-start)
 7. [Repository Layout](#repository-layout)
-8. [Contributing](#contributing)
-9. [License](#license)
 
 ---
 
@@ -62,13 +60,16 @@ https://drive.google.com/file/d/1SiPJ3YWXkQwKLGsfjZ4HTV-lc09_y5gc/view?usp=shari
 ```bash
  python -m venv myenv
  source myenv/bin/activate
- pip install -r requirements.txt
+ pip install -r backend/requirements.txt
+ 
 
 # Launch local web front-end
  python launch.py
 
 # Launch back-end
-ANTHROPIC_API_KEY=YourKey uvicorn main:app --reload
+set ANTHROPIC_API_KEY 
+cd backend 
+uvicorn main:app --reload
 ```
 Then open the browser, drag in a scenario PDF, fly the mission, and drop `mission_log.json` for instant debrief.
 
@@ -82,16 +83,6 @@ Then open the browser, drag in a scenario PDF, fly the mission, and drop `missio
 ├── docs/           # Demo media & white-papers
 └── scripts/        # Utilities
 ```
-
----
-
-## Contributing
-Issues, PRs, and doctrine nerds welcome! See **[`CONTRIBUTING.md`](CONTRIBUTING.md)**.
-
----
-
-## License
-Apache-2.0 – see **[`LICENSE`](LICENSE)**.
 
 ---
 
