@@ -66,7 +66,7 @@ https://drive.google.com/file/d/1SiPJ3YWXkQwKLGsfjZ4HTV-lc09_y5gc/view?usp=shari
  python launch.py
 
 # Launch back-end
-set ANTHROPIC_API_KEY 
+set ANTHROPIC_API_KEY=Your Key
 cd backend 
 uvicorn main:app --reload
 ```
