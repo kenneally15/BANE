@@ -1,20 +1,16 @@
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 import styles from './Guidance.module.css';
 import Header from './Header';
+// import MarkdownViewer from './MarkdownViewer';
 
 const Guidance = () => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   return (
     <>
     <Header></Header>
-    <div className={styles.container}>
-      <header className={styles.header}>
-        <button className={styles.backButton} onClick={() => navigate('/')}>
-          Back to Home
-        </button>
-      </header>
-      
+    {/* <MarkdownViewer markdownUrl="../../Wargame Scenario Considerations.md" /> */}
+    <div className={styles.container}>      
       <div className={styles.content}>
         <div className={styles.section}>
           <h2>Wargame Scenario Considerations</h2>
