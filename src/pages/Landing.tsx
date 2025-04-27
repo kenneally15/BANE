@@ -88,7 +88,6 @@ const Landing = () => {
           aiFeedback: finalData.generated_text 
         } 
       });
-      console.log("Navigation attempted");
       
     } catch (error) {
       console.error("Error in handleUpload:", error);

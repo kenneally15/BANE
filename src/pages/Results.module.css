@@ -31,10 +31,11 @@
 }
 
 .content {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  display: flex;
+  flex-direction: column;
+  /* grid-template-columns: 1fr 1fr; */
   gap: 2rem;
-  height: calc(100vh - 150px);
+  /* height: calc(100vh - 150px); */
 }
 
 .section {
@@ -52,16 +53,16 @@
   margin-bottom: 1rem;
 }
 
-.logContent,
+/* .logContent,
 .feedbackContent {
   flex: 1;
   overflow-y: auto;
   background-color: #ffffff;
   border-radius: 8px;
   padding: 1rem;
-}
+} */
 
-.logContent pre {
+pre {
   margin: 0;
   white-space: pre-wrap;
   word-wrap: break-word;
