@@ -1,13 +1,15 @@
 import { useNavigate } from 'react-router-dom';
 import styles from './Guidance.module.css';
+import Header from './Header';
 
 const Guidance = () => {
   const navigate = useNavigate();
 
   return (
+    <>
+    <Header></Header>
     <div className={styles.container}>
       <header className={styles.header}>
-        <h1>Ally</h1>
         <button className={styles.backButton} onClick={() => navigate('/')}>
           Back to Home
         </button>
@@ -23,6 +25,7 @@ const Guidance = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 
