@@ -61,13 +61,13 @@ https://drive.google.com/file/d/1SiPJ3YWXkQwKLGsfjZ4HTV-lc09_y5gc/view?usp=shari
  source myenv/bin/activate
  pip install -r backend/requirements.txt
  
-# Launch back-end
+ # Launch back-end
  cd backend
  export ANTHROPIC_API_KEY=Your Key
  uvicorn main:app --reload
 
 
-# Launch local web front-end
+ # Launch local web front-end
  cd ..
  npm install
  npm run dev
