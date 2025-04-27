@@ -11,7 +11,6 @@
 4. [Key Features](#key-features)
 5. [Roadmap](#roadmap)
 6. [Quick Start](#quick-start)
-7. [Repository Layout](#repository-layout)
 
 ---
 
@@ -72,17 +71,6 @@ cd backend
 uvicorn main:app --reload
 ```
 Then open the browser, drag in a scenario PDF, fly the mission, and drop `mission_log.json` for instant debrief.
-
----
-
-## Repository Layout
-```
-├── app/            # Front-end (React/TS)
-├── core/           # Event extraction & debrief engine
-├── models/         # LLM & RL artifacts
-├── docs/           # Demo media & white-papers
-└── scripts/        # Utilities
-```
 
 ---
 
