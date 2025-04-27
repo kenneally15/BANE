@@ -1,0 +1,170 @@
+[
+    {
+        "timestamp": 0,
+        "event_type": "SETUP",
+        "details": {
+            "scenario_name": "Team 23 Practice Sortie 2 - With Errors",
+            "blue_forces": [
+                {"id": "f22_1", "type": "F-22", "callsign": "SATAN 1", "package": "MADDOG", "initial_pos": {"x": 0, "y": 0, "z": 30000}},
+                {"id": "f22_2", "type": "F-22", "callsign": "SATAN 2", "package": "MADDOG", "initial_pos": {"x": 5, "y": 0, "z": 30000}},
+                {"id": "f15_1", "type": "F-15EX", "callsign": "HOSS 1", "package": "MADDOG", "initial_pos": {"x": 0, "y": 5, "z": 30000}},
+                {"id": "f15_2", "type": "F-15EX", "callsign": "HOSS 2", "package": "MADDOG", "initial_pos": {"x": 5, "y": 5, "z": 30000}},
+                {"id": "b1_1", "type": "B-1", "callsign": "STRIKE 1", "package": "STRIKE", "weapons": ["LRASM"], "initial_pos": {"x": 0, "y": -20, "z": 25000}},
+                {"id": "awacs_1", "type": "E-3", "callsign": "MAGIC", "package": "HVAA", "initial_pos": {"x": -50, "y": -100, "z": 35000}}
+            ],
+            "red_forces_estimate": ["Fighter Groups", "Naval Surface Group"],
+            "mission_objectives": ["Destroy Red Surface Combatants", "Ensure STRIKE 1 RTBs", "Ensure MAGIC survives"]
+        }
+    },
+    {
+        "timestamp": 2,
+        "event_type": "PLAYER_ACTION",
+        "details": {
+            "action_type": "SET_FLIGHT_PATH",
+            "actor_id": "player",
+            "target_ids": ["f22_1", "f22_2", "f15_1", "f15_2"],
+            "parameters": { "destination_type": "CAP", "coordinates": {"x": 0, "y": 80, "z": 35000}, "label": "Fighter CAP"}
+        }
+    },
+    {
+        "timestamp": 6,
+        "event_type": "PLAYER_ACTION",
+        "details": {
+            "action_type": "SET_FLIGHT_PATH",
+            "actor_id": "player",
+            "target_ids": ["b1_1"],
+            "parameters": { "destination_type": "WAYPOINT", "coordinates": {"x": 0, "y": 180, "z": 25000}, "label": "Bomber Transit WP1"}
+        }
+    },
+    {
+        "timestamp": 8,
+        "event_type": "PLAYER_ACTION",
+        "details": {
+            "action_type": "SET_FLIGHT_PATH",
+            "actor_id": "player",
+            "target_ids": ["b1_1"],
+            "parameters": { "destination_type": "PEPZ", "coordinates": {"x": 0, "y": 50, "z": 25000}, "label": "Bomber PEPZ"}
+        }
+    },
+    {
+        "timestamp": 15,
+        "event_type": "PLAYER_ACTION",
+        "details": {"action_type": "SET_POSTURE", "actor_id": "player", "target_ids": ["f22_1", "f22_2", "f15_1", "f15_2"], "parameters": { "posture": "ASSERTIVE", "radar": "ACTIVE"}}
+    },
+    {
+        "timestamp": 120,
+        "event_type": "MOVEMENT",
+        "details": {"asset_id": "f22_1", "new_position": {"x": 0, "y": 80, "z": 32000}}
+    },
+    {
+        "timestamp": 130,
+        "event_type": "MOVEMENT",
+        "details": {"asset_id": "b1_1", "new_position": {"x": 0, "y": 40, "z": 25000}}
+    },
+     {
+        "timestamp": 145,
+        "event_type": "STATUS_CHANGE",
+        "details": {"asset_id": "b1_1", "status_type": "WAYPOINT_REACHED", "new_value": "Bomber PEPZ"}
+    },
+    {
+        "timestamp": 190,
+        "event_type": "DETECTION",
+        "details": {
+            "detector_id": "awacs_1",
+            "detected_groups": [
+                {"group_id": "red_grp_1", "composition_estimate": ["4x Fighter"], "position": {"x": 20, "y": 290, "z": 30000}, "range_nm": 145, "bearing_deg": 15}
+            ]
+        }
+    },
+    {
+        "timestamp": 210,
+        "event_type": "STATUS_CHANGE",
+        "details": {"asset_id": "f22_1", "status_type": "WAYPOINT_REACHED", "new_value": "Fighter CAP"}
+    },
+     {
+        "timestamp": 230,
+        "event_type": "DETECTION",
+        "details": { "detector_id": "f22_1", "detected_asset_id": "red_grp_1", "range_nm": 100}
+    },
+    {
+        "timestamp": 250,
+        "event_type": "PLAYER_ACTION",
+        "details": {"action_type": "COMMIT", "actor_id": "player", "target_ids": ["f22_1", "f22_2", "f15_1", "f15_2"], "parameters": {"commit_groups": ["red_grp_1"]}}
+    },
+    {
+        "timestamp": 255,
+        "event_type": "PLAYER_ACTION",
+        "details": {"action_type": "ASSIGN_TARGET", "actor_id": "player", "target_ids": ["f22_1", "f22_2"], "parameters": {"enemy_group_id": "red_grp_1"}}
+    },
+     {
+        "timestamp": 260,
+        "event_type": "PLAYER_ACTION",
+        "details": {
+            "action_type": "SET_FLIGHT_PATH",
+            "actor_id": "player",
+            "target_ids": ["b1_1"],
+            "parameters": { "destination_type": "TARGET_AREA", "coordinates": {"x": 0, "y": 400, "z": 25000}, "label": "Enemy Ships"}
+        }
+    },
+    {
+        "timestamp": 270,
+        "event_type": "COMBAT",
+        "details": {"action_type": "FIRE_MISSILE", "shooter_id": "f22_1", "target_id": "red_fighter_1a", "weapon_type": "AIM-120"}
+    },
+    {
+        "timestamp": 300,
+        "event_type": "COMBAT",
+        "details": {"action_type": "KILL", "asset_id": "red_fighter_1a", "result": "destroyed", "source_id": "f22_1"}
+    },
+    {
+       "timestamp": 310,
+       "event_type": "PLAYER_ACTION",
+       "details": {
+         "action_type": "SET_FLIGHT_PATH",
+         "actor_id": "player",
+         "target_ids": ["awacs_1"],
+         "parameters": { "destination_type": "WAYPOINT", "coordinates": {"x": -70, "y": -120, "z": 35000}, "label": "AWACS Slide WP"}
+       }
+     },
+     {
+       "timestamp": 315,
+       "event_type": "MOVEMENT",
+       "details": {"asset_id": "awacs_1", "new_position": {"x": -55, "y": -105, "z": 35000}}
+     },
+     {
+        "timestamp": 350,
+        "event_type": "MOVEMENT",
+        "details": {"asset_id": "b1_1", "new_position": {"x": 0, "y": 250, "z": 25000}}
+    },
+    {
+        "timestamp": 380,
+        "event_type": "STATUS_CHANGE",
+        "details": {"asset_id": "awacs_1", "status_type": "SENSOR_REPORT", "new_value": "PICTURE_CLEAN"}
+    },
+    {
+        "timestamp": 480,
+        "event_type": "COMBAT",
+        "details": {"action_type": "BOMB_RUN", "shooter_id": "b1_1", "target_id": "red_ship_1", "weapon_type": "LRASM", "result": "HIT"}
+    },
+    {
+        "timestamp": 485,
+        "event_type": "STATUS_CHANGE",
+        "details": {"asset_id": "b1_1", "status_type": "MISSION_PHASE", "new_value": "MILLER_TIME"}
+    },
+    {
+        "timestamp": 490,
+        "event_type": "PLAYER_ACTION",
+        "details": {"action_type": "RTB", "actor_id": "player", "target_ids": ["b1_1", "f22_1", "f22_2", "f15_1", "f15_2", "awacs_1"]}
+    },
+    {
+        "timestamp": 650,
+        "event_type": "MISSION_END",
+        "details": {
+            "outcome": "SUCCESS",
+            "losses_blue": [],
+            "losses_red": ["Assumed Red Air", "red_ship_1"],
+            "objectives_met": ["Destroy Red Surface Combatants", "Ensure STRIKE 1 RTBs", "Ensure MAGIC survives"],
+            "objectives_failed": []
+        }
+    }
+]

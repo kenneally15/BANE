@@ -9,39 +9,60 @@ interface UploadedFile {
 }
 
 const Landing = () => {
-  const [uploadedFile, setUploadedFile] = useState<UploadedFile | null>(null);
+  const [uploadedLogFile, setUploadedLogFile] = useState<UploadedFile | null>(null);
+  const [uploadedGuidanceFile, setUploadedGuidanceFile] = useState<UploadedFile | null>(null);
   const [isUploading, setIsUploading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const [logError, setLogError] = useState<string | null>(null);
+  const [guidanceError, setGuidanceError] = useState<string | null>(null);
   const navigate = useNavigate();
 
-  const handleDragOver = (e: DragEvent) => {
+  const handleLogDragOver = (e: DragEvent) => {
     e.preventDefault();
   };
 
-  const handleDrop = (e: DragEvent) => {
+  const handleGuidanceDragOver = (e: DragEvent) => {
+    e.preventDefault();
+  };
+
+  const handleLogDrop = (e: DragEvent) => {
     e.preventDefault();
     const file = e.dataTransfer?.files[0];
 
     if (file && file.type === "application/json") {
-      setUploadedFile({
+      setUploadedLogFile({
         name: file.name,
         file: file,
       });
-      setError(null);
+      setLogError(null);
     } else {
-      setError("Please select a JSON file");
+      setLogError("Please select a JSON file");
+    }
+  };
+
+  const handleGuidanceDrop = (e: DragEvent) => {
+    e.preventDefault();
+    const file = e.dataTransfer?.files[0];
+
+    if (file && file.type === "application/pdf") {
+      setUploadedGuidanceFile({
+        name: file.name,
+        file: file,
+      });
+      setGuidanceError(null);
+    } else {
+      setGuidanceError("Please select a PDF file");
     }
   };
 
   const handleUpload = async () => {
-    if (!uploadedFile) return;
+    if (!uploadedLogFile) return;
 
     setIsUploading(true);
-    setError(null);
+    setLogError(null);
 
     try {
       // First API call - convert JSON to natural language
-      const fileContent = await uploadedFile.file.text();
+      const fileContent = await uploadedLogFile.file.text();
       const jsonData = JSON.parse(fileContent);
 
       const response = await fetch("http://127.0.0.1:8000/json_to_nl_log", {
@@ -79,9 +100,8 @@ const Landing = () => {
       }
 
       const finalData = await newResponse.json();
-      console.log("Final data received:", finalData);
       
-      // Try passing the data directly in the state object
+      // Navigate to results page with data
       navigate('/results', { 
         state: { 
           eventLog: nlLogData.natural_language_log,
@@ -91,15 +111,30 @@ const Landing = () => {
       
     } catch (error) {
       console.error("Error in handleUpload:", error);
-      setError(error instanceof Error ? error.message : "Failed to process file");
+      setLogError(error instanceof Error ? error.message : "Failed to process file");
     } finally {
       setIsUploading(false);
     }
   };
 
-  const handleDelete = () => {
-    setUploadedFile(null);
-    setError(null);
+  const handleLogDelete = () => {
+    setUploadedLogFile(null);
+    setLogError(null);
+  };
+
+  const handleGuidanceDelete = () => {
+    setUploadedGuidanceFile(null);
+    setGuidanceError(null);
+  };
+
+  const handleViewGuidance = async () => {
+    if (!uploadedGuidanceFile) return;
+    
+    // Create a URL for the PDF file
+    const fileURL = URL.createObjectURL(uploadedGuidanceFile.file);
+    
+    // Open the PDF in a new tab
+    window.open(fileURL, '_blank');
   };
 
   return (
@@ -109,43 +144,62 @@ const Landing = () => {
         <div className={styles.uploadSection}>
           <div className={styles.card}>
             <h2>Instructor Guidance</h2>
-            <p>View pre-populated guidance for instructors</p>
-            <button
-              className={styles.button}
-              onClick={() => navigate("/guidance")}
+            <div
+              className={`${styles.dropZone}`}
+              onDragOver={handleGuidanceDragOver}
+              onDrop={handleGuidanceDrop}
             >
-              View Guidance
-            </button>
+              {uploadedGuidanceFile ? (
+                <div className={styles.uploadSuccess}>
+                  <span className={styles.fileName}>{uploadedGuidanceFile.name}</span>
+                  <div className={styles.buttonGroup}>
+                    <button
+                      className={styles.button}
+                      onClick={handleViewGuidance}
+                    >
+                      View Guidance
+                    </button>
+                    <button
+                      className={styles.deleteButton}
+                      onClick={handleGuidanceDelete}
+                    >
+                      Delete File
+                    </button>
+                  </div>
+                  {guidanceError && <div className={styles.errorMessage}>{guidanceError}</div>}
+                </div>
+              ) : (
+                <p>Drag & drop your instructor guidance PDF</p>
+              )}
+            </div>
           </div>
 
           <div className={styles.card}>
             <h2>Upload Gameplay Log</h2>
             <div
               className={`${styles.dropZone}`}
-              onDragOver={handleDragOver}
-              onDrop={handleDrop}
+              onDragOver={handleLogDragOver}
+              onDrop={handleLogDrop}
             >
-              {uploadedFile ? (
+              {uploadedLogFile ? (
                 <div className={styles.uploadSuccess}>
-                  <span className={styles.fileName}>{uploadedFile.name}</span>
+                  <span className={styles.fileName}>{uploadedLogFile.name}</span>
                   <button
                     className={styles.deleteButton}
-                    onClick={handleDelete}
+                    onClick={handleLogDelete}
                   >
                     Delete File
                   </button>
-                  {error && <div className={styles.errorMessage}>{error}</div>}
+                  {logError && <div className={styles.errorMessage}>{logError}</div>}
                 </div>
               ) : (
-                <>
-                  <p>Drag & drop your gameplay log</p>
-                </>
+                <p>Drag & drop your gameplay log</p>
               )}
             </div>
           </div>
         </div>
 
-        {uploadedFile && (
+        {uploadedLogFile && !uploadedGuidanceFile && (
           <div className={styles.sendSection}>
             <button
               className={styles.sendButton}

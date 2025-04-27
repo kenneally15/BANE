@@ -57,8 +57,8 @@
   background: #f8f8f8;
   border-radius: 8px;
   padding: 1rem;
-  max-height: 600px;
-  overflow-y: auto;
+  /* max-height: 600px; */
+  /* overflow-y: auto; */
 }
 
 .logEntry {
@@ -93,27 +93,97 @@
   flex: 1;
 }
 
-.feedbackContent {
+/* .feedbackContent {
   background: #f8f8f8;
   border-radius: 8px;
   padding: 1rem;
   line-height: 1.6;
   white-space: pre-wrap;
   word-break: break-word;
+  max-height: 600px;
+  overflow-y: auto;
+} */
+
+.feedbackEvent {
+  background: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 1rem;
 }
 
-pre {
-  margin: 0;
-  white-space: pre-wrap;
-  word-wrap: break-word;
+.eventHeader {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.eventHeader .timestamp {
+  background: #007bff;
+  color: white;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
   font-family: monospace;
-  font-size: 0.9rem;
-  line-height: 1.5;
 }
 
-.feedback {
-  font-size: 1rem;
-  line-height: 1.6;
+.eventType {
+  font-weight: 500;
+  color: #333;
+}
+
+.evaluation,
+.rationale,
+.recommendation {
+  margin-top: 0.5rem;
+  padding: 0.5rem;
+  border-radius: 4px;
+}
+
+.evaluation {
+  background: #e3f2fd;
+}
+
+.rationale {
+  background: #fffeee;
+}
+
+.recommendation {
+  background: #e8f5e9;
+}
+
+.debriefNotes {
+  margin-top: 2rem;
+  padding: 1rem;
+  background: #fff3e0;
+  border-radius: 8px;
+}
+
+.debriefNotes h3 {
+  color: #333;
+  margin-bottom: 0.5rem;
+}
+
+.debriefNotes ul {
+  list-style-type: disc;
+  padding-left: 1.5rem;
+}
+
+.debriefNotes li {
+  margin-bottom: 0.5rem;
+}
+
+.overallEvaluation {
+  margin-top: 2rem;
+  padding: 1rem;
+  background: #fafafa;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+}
+
+.overallEvaluation h3 {
+  color: #333;
+  margin-bottom: 0.5rem;
 }
 
 .loading {
@@ -126,13 +196,9 @@ pre {
 }
 
 .error {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
-  gap: 1rem;
   color: #dc3545;
+  text-align: center;
+  padding: 2rem;
 }
 
 .button {
@@ -143,6 +209,7 @@ pre {
   padding: 0.75rem 1.5rem;
   cursor: pointer;
   transition: background-color 0.2s;
+  margin-top: 1rem;
 }
 
 .button:hover {
