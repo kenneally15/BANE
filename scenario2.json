@@ -1,0 +1,146 @@
+[
+    {
+      "timestamp": 0,
+      "event_type": "SETUP",
+      "details": {
+        "scenario_name": "Team 23 Practice Sortie 3",
+        "blue_forces": [
+          {"id": "f22_1", "type": "F-22", "callsign": "SATAN 1", "package": "MADDOG", "initial_pos": {"x": 0, "y": 0, "z": 30000}},
+          {"id": "f22_2", "type": "F-22", "callsign": "SATAN 2", "package": "MADDOG", "initial_pos": {"x": 5, "y": 0, "z": 30000}},
+          {"id": "f35_1", "type": "F-35", "callsign": "BONG 1", "package": "MADDOG", "initial_pos": {"x": 0, "y": 5, "z": 30000}},
+          {"id": "f35_2", "type": "F-35", "callsign": "BONG 2", "package": "MADDOG", "initial_pos": {"x": 5, "y": 5, "z": 30000}},
+          {"id": "b1_1", "type": "B-1", "callsign": "STRIKE 1", "package": "STRIKE", "weapons": ["LRASM"], "initial_pos": {"x": -10, "y": -50, "z": 25000}},
+          {"id": "awacs_1", "type": "E-3", "callsign": "MAGIC", "package": "HVAA", "initial_pos": {"x": -50, "y": -100, "z": 35000}}
+        ],
+        "red_forces_estimate": ["Lead Fighter Group", "Trailing Fighter Group", "Naval Surface Group"],
+        "mission_objectives": ["Destroy Red Surface Combatants", "Ensure STRIKE 1 RTBs", "Ensure MAGIC survives"]
+      }
+    },
+    {
+      "timestamp": 1,
+      "event_type": "PLAYER_ACTION",
+      "details": {"action_type": "SET_FLIGHT_PATH", "actor_id": "player", "target_ids": ["f22_1", "f22_2", "f35_1", "f35_2"], "parameters": { "destination_type": "CAP", "coordinates": {"x": 0, "y": 200, "z": 35000}, "label": "Fighter CAP"}}
+    },
+    {
+      "timestamp": 5,
+      "event_type": "PLAYER_ACTION",
+      "details": {"action_type": "SET_FLIGHT_PATH", "actor_id": "player", "target_ids": ["b1_1"], "parameters": { "destination_type": "PEPZ", "coordinates": {"x": -10, "y": 100, "z": 25000}, "label": "Bomber PEPZ"}}
+    },
+    {
+      "timestamp": 8,
+      "event_type": "PLAYER_ACTION",
+      "details": {"action_type": "SET_POSTURE", "actor_id": "player", "target_ids": ["f22_1", "f22_2", "f35_1", "f35_2"], "parameters": { "posture": "ASSERTIVE", "radar": "ACTIVE"}}
+    },
+    {
+      "timestamp": 180,
+      "event_type": "DETECTION",
+      "details": {
+          "detector_id": "awacs_1",
+          "detected_groups": [
+              {"group_id": "red_grp_1", "composition_estimate": ["2x Su-57 (FELON)"], "position": {"x": 10, "y": 310, "z": 30000}, "range_nm": 135},
+              {"group_id": "red_grp_2", "composition_estimate": ["2x Su-30 (FLANKER)"], "position": {"x": -10, "y": 290, "z": 30000}, "range_nm": 120}
+          ]
+      }
+    },
+    {
+      "timestamp": 185,
+      "event_type": "STATUS_CHANGE",
+      "details": {"asset_id": "awacs_1", "status_type": "HVAA_DEFENSE", "new_value": "SLIDE_INITIATED"}
+    },
+    {
+      "timestamp": 240,
+      "event_type": "STATUS_CHANGE",
+      "details": {"asset_id": "f22_1", "status_type": "WAYPOINT_REACHED", "new_value": "Fighter CAP"}
+    },
+    {
+      "timestamp": 260,
+      "event_type": "PLAYER_ACTION",
+      "details": {"action_type": "COMMIT", "actor_id": "player", "target_ids": ["f22_1", "f22_2", "f35_1", "f35_2"], "parameters": {"commit_groups": ["red_grp_1", "red_grp_2"]}}
+    },
+    {
+      "timestamp": 265,
+      "event_type": "PLAYER_ACTION",
+      "details": {
+        "action_type": "ASSIGN_TARGET",
+        "actor_id": "player",
+        "target_ids": ["f22_1", "f22_2"],
+        "parameters": {"enemy_group_id": "red_grp_2"}
+      }
+    },
+    {
+      "timestamp": 266,
+      "event_type": "PLAYER_ACTION",
+      "details": {
+        "action_type": "ASSIGN_TARGET",
+        "actor_id": "player",
+        "target_ids": ["f35_1", "f35_2"],
+        "parameters": {"enemy_group_id": "red_grp_1"}
+      }
+    },
+    {
+      "timestamp": 280,
+      "event_type": "COMBAT",
+      "details": {"action_type": "FIRE_MISSILE", "shooter_id": "f22_1", "target_id": "red_fighter_2a", "weapon_type": "AIM-120"}
+    },
+    {
+      "timestamp": 282,
+      "event_type": "COMBAT",
+      "details": {"action_type": "FIRE_MISSILE", "shooter_id": "f35_1", "target_id": "red_fighter_1a", "weapon_type": "AIM-120"}
+    },
+    {
+      "timestamp": 310,
+      "event_type": "COMBAT",
+      "details": {"action_type": "KILL", "asset_id": "red_fighter_2a", "result": "destroyed", "source_id": "f22_1"}
+    },
+    {
+      "timestamp": 315,
+      "event_type": "PLAYER_ACTION",
+      "details": {
+          "action_type": "SET_POSTURE",
+          "actor_id": "player",
+          "target_ids": ["f22_1", "f22_2"],
+          "parameters": { "posture": "DEFENSIVE", "radar": "PASSIVE", "maneuver": "TURN_COLD"}
+      }
+    },
+    {
+      "timestamp": 320,
+      "event_type": "COMBAT",
+      "details": {"action_type": "KILL", "asset_id": "f35_1", "result": "destroyed", "source_id": "red_fighter_1a"}
+    },
+    {
+      "timestamp": 410,
+      "event_type": "STATUS_CHANGE",
+      "details": {"asset_id": "awacs_1", "status_type": "SENSOR_REPORT", "new_value": "PICTURE_CLEAN"}
+    },
+    {
+      "timestamp": 420,
+      "event_type": "PLAYER_ACTION",
+      "details": {"action_type": "SET_FLIGHT_PATH", "actor_id": "player", "target_ids": ["b1_1"], "parameters": { "destination_type": "TARGET_AREA", "coordinates": {"x": 0, "y": 400, "z": 25000}, "label": "Enemy Ships"}}
+    },
+    {
+      "timestamp": 510,
+      "event_type": "COMBAT",
+      "details": {"action_type": "BOMB_RUN", "shooter_id": "b1_1", "target_id": "red_ship_1", "weapon_type": "LRASM", "result": "HIT"}
+    },
+    {
+      "timestamp": 515,
+      "event_type": "STATUS_CHANGE",
+      "details": {"asset_id": "b1_1", "status_type": "MISSION_PHASE", "new_value": "MILLER_TIME"}
+    },
+    {
+      "timestamp": 520,
+      "event_type": "PLAYER_ACTION",
+      "details": {"action_type": "RTB", "actor_id": "player", "target_ids": ["b1_1", "f22_1", "f22_2", "f35_2", "awacs_1"]}
+    },
+    {
+      "timestamp": 700,
+      "event_type": "MISSION_END",
+      "details": {
+          "outcome": "PARTIAL_SUCCESS",
+          "losses_blue": ["f35_1"],
+          "losses_red": ["All Red Air Assumed", "red_ship_1"],
+          "objectives_met": ["Neutralize adversary surface combatants", "Ensure strike package survival", "Ensure high-value asset survival"],
+          "objectives_failed": ["Minimize friendly losses (1/4 fighters = 25% loss boundary hit)"]
+      }
+    }
+  ]
