@@ -62,15 +62,15 @@ https://drive.google.com/file/d/1SiPJ3YWXkQwKLGsfjZ4HTV-lc09_y5gc/view?usp=shari
  pip install -r backend/requirements.txt
  
 # Launch back-end
-cd backend
-export ANTHROPIC_API_KEY=Your Key
-uvicorn main:app --reload
+ cd backend
+ export ANTHROPIC_API_KEY=Your Key
+ uvicorn main:app --reload
 
 
 # Launch local web front-end
-cd ..
-npm install
-npm run dev
+ cd ..
+ npm install
+ npm run dev
 ```
 
 Then open the browser, drag in an instructor PDF, fly the mission, and drop `mission_log.json` for instant debrief.
