@@ -63,7 +63,7 @@ https://drive.google.com/file/d/1SiPJ3YWXkQwKLGsfjZ4HTV-lc09_y5gc/view?usp=shari
  
 
 # Launch local web front-end
- python launch.py
+ npm run dev
 
 # Launch back-end
 set ANTHROPIC_API_KEY=Your Key
