@@ -1,6 +1,6 @@
 # **BANE – AI War-Game Debrief System**
 
-**BANE** is an AI-powered war-game debrief and training engine that turns mission and perception data into Weapons School-grade feedback for every Airman—from Airman Leadership School students to operational squadrons and Air Operation Centers.
+**BANE** is an AI-powered war game debrief and training system that analyzes mission gameplay and user perception data to deliver personalized, Weapons School-grade feedback for Airmen across all experience levels
 
 ---
 
@@ -37,11 +37,7 @@
 
 ## Demo Walk-through
 * **Scenario:** INDOPACOM strike-package escort versus adversary naval group.
-* **Error #1:** B-1 bombers outrun fighter escort → causal engine flags risk **2 min** before attrition.
-* **Error #2:** 4th-gen F-15s (HOSS flight) committed against stealth Red Air instead of 5th-gen assets → Blue losses.
-* **Perception Insight:** Eye-tracking shows correct threat detection but delayed commit, isolating decision vs. perception error.
-
-*(Screenshots & video: see [`docs/demo`](docs/demo))*
+https://drive.google.com/file/d/1SiPJ3YWXkQwKLGsfjZ4HTV-lc09_y5gc/view?usp=sharing
 
 ---
 
@@ -50,10 +46,7 @@
 |------------|-------------|
 | **Event Extraction** | Parses mission logs into an ordered timeline of tactical events |
 | **Causal Inference** | Links actions to outcomes using doctrinal rules and LLM reasoning |
-| **Adaptive Scoring** | Grades force packaging, formation geometry, threat awareness, etc. |
 | **Eye-Tracking Fusion** | Separates decision errors from perception gaps |
-| **Experience-Aware Content** | Adjusts terminology and depth to trainee’s expertise level |
-| **Extensible Plug-ins** | Integrate custom sims, sensors, or biometric feeds |
 
 ---
 
@@ -67,13 +60,15 @@
 
 ## Quick Start
 ```bash
-# Clone & install
- git clone https://github.com/your-org/bane.git
- cd bane
+ python -m venv myenv
+ source myenv/bin/activate
  pip install -r requirements.txt
 
 # Launch local web front-end
- python launch.py   # => http://localhost:8080
+ python launch.py
+
+# Launch back-end
+ANTHROPIC_API_KEY=##YourAPIKey uvicorn main:app --reload
 ```
 Then open the browser, drag in a scenario PDF, fly the mission, and drop `mission_log.json` for instant debrief.
 
