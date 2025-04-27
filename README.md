@@ -68,7 +68,7 @@ https://drive.google.com/file/d/1SiPJ3YWXkQwKLGsfjZ4HTV-lc09_y5gc/view?usp=shari
  python launch.py
 
 # Launch back-end
-ANTHROPIC_API_KEY=##YourAPIKey uvicorn main:app --reload
+ANTHROPIC_API_KEY=YourAPIKey uvicorn main:app --reload
 ```
 Then open the browser, drag in a scenario PDF, fly the mission, and drop `mission_log.json` for instant debrief.
 
