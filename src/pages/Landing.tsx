@@ -5,7 +5,6 @@ import styles from './Landing.module.css';
 
 interface UploadedFile {
   name: string;
-  size: number;
   file: File;
 }
 
@@ -26,33 +25,13 @@ const Landing = () => {
     if (file && file.type === 'application/json') {
       setUploadedFile({
         name: file.name,
-        size: file.size,
         file: file
       });
       setError(null);
+      console.log(file);
     } else {
       setError('Please select a JSON file');
     }
-  };
-
-  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
-    if (file && file.type === 'application/json') {
-      setUploadedFile({
-        name: file.name,
-        size: file.size,
-        file: file
-      });
-      setError(null);
-    } else {
-      setError('Please select a JSON file');
-    }
-  };
-
-  const formatFileSize = (bytes: number): string => {
-    if (bytes < 1024) return bytes + ' B';
-    if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' KB';
-    return (bytes / (1024 * 1024)).toFixed(1) + ' MB';
   };
 
   const handleUpload = async () => {
@@ -65,17 +44,21 @@ const Landing = () => {
       const formData = new FormData();
       formData.append('file', uploadedFile.file);
       
-      const response = await fetch('/api/upload', {
+      const response = await fetch('http://127.0.0.1:8000/generate', {
         method: 'POST',
-        body: formData
+        body: formData,
+        headers: {
+          'Accept': 'application/json',
+        }
       });
 
       if (!response.ok) {
         throw new Error('Failed to upload file');
       }
 
+      const data = await response.json();
       // Navigate to results page after successful upload
-      navigate('/results');
+      navigate('/results', { state: { data } });
     } catch (error) {
       setError(error instanceof Error ? error.message : 'Failed to upload file');
     } finally {
@@ -105,7 +88,7 @@ const Landing = () => {
           </div>
 
           <div className={styles.card}>
-            <h2>Upload Gameplay log</h2>
+            <h2>Upload Gameplay Log</h2>
             <div 
               className={`${styles.dropZone}`}
               onDragOver={handleDragOver}
@@ -114,7 +97,7 @@ const Landing = () => {
               {uploadedFile ? (
                 <div className={styles.uploadSuccess}>
                   <span className={styles.fileName}>
-                    {uploadedFile.name} ({formatFileSize(uploadedFile.size)})
+                    {uploadedFile.name}
                   </span>
                   <button 
                     className={styles.deleteButton}

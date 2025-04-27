@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import styles from './Results.module.css';
 
 interface FeedbackData {
@@ -8,29 +8,20 @@ interface FeedbackData {
 }
 
 const Results = () => {
-  const [data, setData] = useState<FeedbackData | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  const location = useLocation();
   const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  
+  // Get the data passed from Landing page
+  const data = location.state?.data as FeedbackData;
 
   useEffect(() => {
-    const fetchResults = async () => {
-      try {
-        const response = await fetch('/api/results');
-        if (!response.ok) {
-          throw new Error('Failed to fetch results');
-        }
-        const data = await response.json();
-        setData(data);
-      } catch (error) {
-        setError(error instanceof Error ? error.message : 'Failed to fetch results');
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    fetchResults();
-  }, []);
+    // If no data was passed, redirect back to home
+    if (!data) {
+      navigate('/');
+    }
+  }, [data, navigate]);
 
   const handleBack = () => {
     navigate('/');
