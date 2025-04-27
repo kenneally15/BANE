@@ -12,6 +12,11 @@ export interface FeedbackSummary {
   overallEvaluation?: string;
 }
 
+const removeAnnotations = (text: string): string => {
+  // Remove any text that matches the pattern "*(TEXT)*"
+  return text.replace(/\*\([^)]*\)\*/g, '').trim();
+};
+
 export const parseFeedback = (feedbackText: string): FeedbackSummary => {
   if (!feedbackText) return { events: [] };
 
@@ -38,18 +43,22 @@ export const parseFeedback = (feedbackText: string): FeedbackSummary => {
       };
     } else if (trimmedLine.startsWith('EVENT:')) {
       if (currentEvent.timestamp) {
-        currentEvent.event = trimmedLine.split('EVENT:')[1].trim();
+        // Remove annotations only from the event description
+        currentEvent.event = removeAnnotations(trimmedLine.split('EVENT:')[1].trim());
       }
     } else if (trimmedLine.startsWith('EVALUATION:')) {
       if (currentEvent.timestamp) {
+        // Keep annotations in evaluation
         currentEvent.evaluation = trimmedLine.split('EVALUATION:')[1].trim();
       }
     } else if (trimmedLine.startsWith('RATIONALE:')) {
       if (currentEvent.timestamp) {
+        // Keep annotations in rationale
         currentEvent.rationale = trimmedLine.split('RATIONALE:')[1].trim();
       }
     } else if (trimmedLine.startsWith('RECOMMENDATION:')) {
       if (currentEvent.timestamp) {
+        // Keep annotations in recommendation
         currentEvent.recommendation = trimmedLine.split('RECOMMENDATION:')[1].trim();
       }
     } else if (trimmedLine.startsWith('DEBRIEF NOTES:')) {
@@ -61,8 +70,10 @@ export const parseFeedback = (feedbackText: string): FeedbackSummary => {
       isInDebriefSection = true;
     } else if (trimmedLine.startsWith('OVERALL EVALUATION:')) {
       isInDebriefSection = false;
+      // Keep annotations in overall evaluation
       overallEvaluation = trimmedLine.split('OVERALL EVALUATION:')[1].trim();
     } else if (trimmedLine && isInDebriefSection) {
+      // Keep annotations in debrief notes
       debriefNotes.push(trimmedLine);
     }
   });

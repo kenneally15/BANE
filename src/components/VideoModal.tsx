@@ -27,12 +27,11 @@ const VideoModal: React.FC<VideoModalProps> = ({ isOpen, onClose, timestamp }) =
   return (
     <div className={styles.modalOverlay} onClick={onClose}>
       <div className={styles.modalContent} onClick={e => e.stopPropagation()}>
-        <button className={styles.closeButton} onClick={onClose}>×</button>
         <video
           className={styles.video}
           controls
           onLoadedData={handleVideoLoad}
-          src="/RealEye-heatmap-recording.mp4"
+          src="/video_000410.mp4"
         />
       </div>
     </div>

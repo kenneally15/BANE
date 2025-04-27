@@ -17,15 +17,20 @@ export const parseTimeToSeconds = (timestamp: string): number => {
   );
 };
 
+const removeAnnotations = (text: string): string => {
+  // Remove any text that matches the pattern "*(TEXT)*"
+  return text.replace(/\*\([^)]*\)\*/g, '').trim();
+};
+
 export const parseEventLog = (log: string): LogEntry[] => {
   if (!log) return [];
   
   return log.split('\n').map(line => {
     const timeMatch = line.match(/TIME: ([\d]{2}h[\d]{2}m[\d]{2}s)/);
-    if (!timeMatch) return { timestamp: '', content: line, videoTimestamp: 0 };
+    if (!timeMatch) return { timestamp: '', content: removeAnnotations(line), videoTimestamp: 0 };
     
     const timestamp = timeMatch[1];
-    const content = line.replace(`TIME: ${timestamp}`, '').trim();
+    const content = removeAnnotations(line.replace(`TIME: ${timestamp}`, '').trim());
     const videoTimestamp = parseTimeToSeconds(timestamp);
     
     return {

@@ -120,8 +120,8 @@
 }
 
 .eventHeader .timestamp {
-  background: #007bff;
-  color: white;
+  background: #e0e0e0;
+  /* color: white; */
   padding: 0.25rem 0.5rem;
   border-radius: 4px;
   font-family: monospace;
@@ -140,8 +140,16 @@
   border-radius: 4px;
 }
 
-.evaluation {
-  background: #e3f2fd;
+.evaluation[data-type="incorrect"] {
+  background: #ffebee; /* light red */
+}
+
+.evaluation[data-type="correct"] {
+  background: #e3f2fd; /* light blue */
+}
+
+.evaluation[data-type="noteworthy"] {
+  background: #f3e5f5; /* light purple */
 }
 
 .rationale {
@@ -214,6 +222,22 @@
 
 .button:hover {
   background-color: #0056b3;
+}
+
+.replayButton {
+  margin-top: 12px;
+  padding: 8px 16px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.2s;
+}
+
+.replayButton:hover {
+  background-color: #357abd;
 }
 
 @media (max-width: 768px) {

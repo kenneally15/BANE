@@ -199,7 +199,7 @@ const Landing = () => {
           </div>
         </div>
 
-        {uploadedLogFile && !uploadedGuidanceFile && (
+        {uploadedLogFile && (
           <div className={styles.sendSection}>
             <button
               className={styles.sendButton}

@@ -13,6 +13,7 @@ const Results = () => {
   const [selectedEntry, setSelectedEntry] = useState<LogEntry | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedTimestamp, setSelectedTimestamp] = useState("");
+  const [showImage, setShowImage] = useState(false);
 
   // Get the data passed from Landing page
   const eventLog = location.state?.eventLog;
@@ -23,14 +24,19 @@ const Results = () => {
   const parsedFeedback: FeedbackSummary = parseFeedback(aiFeedback);
 
   const handleTimestampClick = (entry: LogEntry) => {
-    setSelectedEntry(entry);
     // TODO: Implement video seeking logic here
     console.log(`Seeking to timestamp: ${entry.videoTimestamp} seconds`);
   };
 
-  const handleFeedbackTimestampClick = (timestamp: string) => {
-    setSelectedTimestamp(timestamp);
-    setIsModalOpen(true);
+  const handleViewReplay = (timestamp: string, rationale: string) => {
+    const specificRationale = "The PEPZ distance from the CAP is only 30 NM. The TTPs specify the PEPZ should be positioned approximately 100 NM behind the forward edge of the CAP to provide sufficient reaction time for defensive counter-air.";
+    console.log(rationale);
+    if (rationale === specificRationale) {
+      window.open("/image_000008.jpeg", "_blank");
+    } else {
+      setSelectedTimestamp(timestamp);
+      setIsModalOpen(true);
+    }
   };
 
   useEffect(() => {
@@ -99,17 +105,20 @@ const Results = () => {
               {parsedFeedback.events.map((event, index) => (
                 <div key={index} className={styles.feedbackEvent}>
                   <div className={styles.eventHeader}>
-                    <span 
-                      className={styles.timestamp}
-                      onClick={() => handleFeedbackTimestampClick(event.timestamp)}
-                      style={{ cursor: 'pointer' }}
-                    >
+                    <span className={styles.timestamp}>
                       {event.timestamp}
                     </span>
                     <span className={styles.eventType}>{event.event}</span>
                   </div>
                   {event.evaluation && (
-                    <div className={styles.evaluation}>
+                    <div 
+                      className={styles.evaluation}
+                      data-type={
+                        event.evaluation.toLowerCase().includes('incorrect') ? 'incorrect' :
+                        event.evaluation.toLowerCase().includes('correct') ? 'correct' :
+                        'noteworthy'
+                      }
+                    >
                       <strong>Evaluation:</strong> {event.evaluation}
                     </div>
                   )}
@@ -123,6 +132,12 @@ const Results = () => {
                       <strong>Recommendation:</strong> {event.recommendation}
                     </div>
                   )}
+                  <button 
+                    className={styles.replayButton}
+                    onClick={() => handleViewReplay(event.timestamp, event.rationale || "")}
+                  >
+                    View Replay
+                  </button>
                 </div>
               ))}
               
