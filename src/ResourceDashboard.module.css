@@ -14,19 +14,21 @@
   flex-direction: column;
   gap: 24px;
   overflow-y: auto;
+  height: calc(100vh - 48px); /* Account for dashboard padding */
 }
 
 .rightColumn {
   display: flex;
   flex-direction: column;
   overflow-y: auto;
+  height: calc(100vh - 48px); /* Account for dashboard padding */
 }
 
 .section {
   background: #e5e5e5;
   border-radius: 16px;
   padding: 24px;
-  min-height: 300px;
+  flex: 1 0 0;
   display: flex;
   flex-direction: column;
 }
@@ -48,7 +50,8 @@
 }
 
 .modelFeedback {
-  height: 100%;
+  flex: 1;
+  overflow-y: auto;
 }
 
 .dropZone {

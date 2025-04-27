@@ -3,9 +3,9 @@ import ResourceDashboard from "./ResourceDashboard";
 function App() {
   return (
     <>
-      <ResourceDashboard />;
+      <ResourceDashboard />
     </>
-  );
+  )
 }
 
 export default App;

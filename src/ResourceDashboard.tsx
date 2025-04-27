@@ -94,7 +94,7 @@ const ResourceDashboard = () => {
         </div>
       </div>
     </div>
-  );
+  )
 };
 
 export default ResourceDashboard;
