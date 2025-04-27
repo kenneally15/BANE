@@ -1,0 +1,133 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  padding: 2rem;
+  background-color: #ffffff;
+}
+
+.uploadSection {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  width: 100%;
+}
+
+.card {
+  background-color: #e5e5e5;
+  border-radius: 16px;
+  padding: 2rem;
+  gap: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  min-height: 300px;
+  width: 100%;
+}
+
+.card h2 {
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: #333;
+}
+
+.card p {
+  color: #666;
+}
+
+.dropZone {
+  border: 2px dashed #999999;
+  border-radius: 8px;
+  padding: 16px;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.dropZone:hover {
+  border-color: #666666;
+  background: rgba(255, 255, 255, 0.8);
+}
+
+.uploadSuccess {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.buttonGroup {
+  display: flex;
+  gap: 12px;
+}
+
+.button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 0.75rem 1.5rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.button:hover {
+  background-color: #0056b3;
+}
+
+.sendButton {
+  composes: button;
+  background-color: #28a745;
+}
+
+.sendButton:hover:not(:disabled) {
+  background-color: #218838;
+}
+
+.sendButton:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+.deleteButton {
+  composes: button;
+  background-color: #dc3545;
+}
+
+.deleteButton:hover {
+  background-color: #c82333;
+}
+
+.fileName {
+  font-weight: 500;
+  word-break: break-all;
+}
+
+.errorMessage {
+  color: #dc3545;
+  font-size: 0.9rem;
+}
+
+.sendSection {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .uploadSection {
+    grid-template-columns: 1fr;
+  }
+
+  .card {
+    min-height: 250px;
+  }
+}

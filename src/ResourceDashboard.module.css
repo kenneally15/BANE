@@ -96,6 +96,39 @@
   background: #ff3333;
 }
 
+.buttonGroup {
+  display: flex;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.sendButton {
+  background: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 16px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background-color 0.2s ease;
+}
+
+.sendButton:hover:not(:disabled) {
+  background: #45a049;
+}
+
+.sendButton:disabled {
+  background: #cccccc;
+  cursor: not-allowed;
+}
+
+.errorMessage {
+  color: #ff3333;
+  margin-top: 12px;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
 @media (max-width: 900px) {
   .dashboard {
     grid-template-columns: 1fr;

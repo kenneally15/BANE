@@ -4,10 +4,13 @@ import styles from './ResourceDashboard.module.css';
 interface UploadedFile {
   name: string;
   size: number;
+  file: File;
 }
 
 const ResourceDashboard = () => {
   const [uploadedFile, setUploadedFile] = useState<UploadedFile | null>(null);
+  const [isSending, setIsSending] = useState(false);
+  const [sendError, setSendError] = useState<string | null>(null);
 
   const handleDragOver = (e: DragEvent) => {
     e.preventDefault();
@@ -18,29 +21,46 @@ const ResourceDashboard = () => {
     const file = e.dataTransfer?.files[0];
     
     if (file && file.type === 'application/json') {
-      // Store file metadata
       setUploadedFile({
         name: file.name,
-        size: file.size
+        size: file.size,
+        file: file
       });
-
-      // TODO: Send file to server
-      // const formData = new FormData();
-      // formData.append('file', file);
-      // await fetch('/api/upload', {
-      //   method: 'POST',
-      //   body: formData
-      // });
+      setSendError(null);
     }
   };
 
   const handleDelete = () => {
     setUploadedFile(null);
-    // TODO: Notify server to delete the file
-    // await fetch('/api/delete', {
-    //   method: 'DELETE',
-    //   body: JSON.stringify({ fileName: uploadedFile.name })
-    // });
+    setSendError(null);
+  };
+
+  const handleSend = async () => {
+    if (!uploadedFile) return;
+
+    setIsSending(true);
+    setSendError(null);
+
+    try {
+      const formData = new FormData();
+      formData.append('file', uploadedFile.file);
+      
+      const response = await fetch('/api/upload', {
+        method: 'POST',
+        body: formData
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to upload file');
+      }
+
+      // Clear the file after successful upload
+      setUploadedFile(null);
+    } catch (error) {
+      setSendError(error instanceof Error ? error.message : 'Failed to upload file');
+    } finally {
+      setIsSending(false);
+    }
   };
 
   const formatFileSize = (bytes: number): string => {
@@ -71,12 +91,26 @@ const ResourceDashboard = () => {
                 <span className={styles.fileName}>
                   {uploadedFile.name} ({formatFileSize(uploadedFile.size)})
                 </span>
-                <button 
-                  className={styles.deleteButton}
-                  onClick={handleDelete}
-                >
-                  Delete File
-                </button>
+                <div className={styles.buttonGroup}>
+                  <button 
+                    className={styles.sendButton}
+                    onClick={handleSend}
+                    disabled={isSending}
+                  >
+                    {isSending ? 'Sending...' : 'Send to Server'}
+                  </button>
+                  <button 
+                    className={styles.deleteButton}
+                    onClick={handleDelete}
+                  >
+                    Delete File
+                  </button>
+                </div>
+                {sendError && (
+                  <div className={styles.errorMessage}>
+                    {sendError}
+                  </div>
+                )}
               </div>
             ) : (
               "Drag and drop your JSON event log file here"
@@ -94,7 +128,7 @@ const ResourceDashboard = () => {
         </div>
       </div>
     </div>
-  )
+  );
 };
 
 export default ResourceDashboard;

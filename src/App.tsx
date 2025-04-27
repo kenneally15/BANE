@@ -1,11 +1,9 @@
-import ResourceDashboard from "./ResourceDashboard";
+import Landing from "./pages/Landing";
 
-function App() {
+const App = () => {
   return (
-    <>
-      <ResourceDashboard />
-    </>
-  )
-}
+      <Landing />
+  );
+};
 
 export default App;
