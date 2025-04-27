@@ -28,10 +28,8 @@ const Results = () => {
     console.log(`Seeking to timestamp: ${entry.videoTimestamp} seconds`);
   };
 
-  const handleViewReplay = (timestamp: string, rationale: string) => {
-    const specificRationale = "The PEPZ distance from the CAP is only 30 NM. The TTPs specify the PEPZ should be positioned approximately 100 NM behind the forward edge of the CAP to provide sufficient reaction time for defensive counter-air.";
-    console.log(rationale);
-    if (rationale === specificRationale) {
+  const handleViewReplay = (timestamp: string, evaluation: string) => {
+    if (evaluation.toLowerCase().includes('incorrect')) {
       window.open("/image_000008.jpeg", "_blank");
     } else {
       setSelectedTimestamp(timestamp);
@@ -134,7 +132,7 @@ const Results = () => {
                   )}
                   <button 
                     className={styles.replayButton}
-                    onClick={() => handleViewReplay(event.timestamp, event.rationale || "")}
+                    onClick={() => handleViewReplay(event.timestamp, event.evaluation || "")}
                   >
                     View Replay
                   </button>
