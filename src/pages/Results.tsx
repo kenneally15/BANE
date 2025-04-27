@@ -1,27 +1,26 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import styles from './Results.module.css';
-
-interface FeedbackData {
-  eventLog: string;
-  aiFeedback: string;
-}
+import ReactMarkdown from 'react-markdown';
 
 const Results = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const [isLoading] = useState(false);
+  const [error] = useState<string | null>(null);
+
+  console.log("Trying to load Results page!");
   
   // Get the data passed from Landing page
-  const data = location.state?.data as FeedbackData;
+  const eventLog = location.state?.eventLog;
+  const aiFeedback = location.state?.aiFeedback;
 
   useEffect(() => {
     // If no data was passed, redirect back to home
-    if (!data) {
+    if (!eventLog || !aiFeedback) {
       navigate('/');
     }
-  }, [data, navigate]);
+  }, [eventLog, aiFeedback, navigate]);
 
   const handleBack = () => {
     navigate('/');
@@ -60,18 +59,18 @@ const Results = () => {
       <div className={styles.content}>
         <div className={styles.section}>
           <h2>Event Log</h2>
-          <div className={styles.logContent}>
-            <pre>{data?.eventLog}</pre>
-          </div>
+          {eventLog}
+          {/* <div style={{ maxHeight: '400px', overflowY: 'auto', background: '#f8f8f8', borderRadius: '8px', padding: '1em', fontSize: '1em' }}>
+            <ReactMarkdown>{eventLog || ''}</ReactMarkdown>
+          </div> */}
         </div>
 
         <div className={styles.section}>
           <h2>AI Feedback</h2>
-          <div className={styles.feedbackContent}>
-            <div className={styles.feedback}>
-              {data?.aiFeedback}
-            </div>
-          </div>
+          {aiFeedback}
+          {/* <div style={{ maxHeight: '400px', overflowY: 'auto', background: '#f8f8f8', borderRadius: '8px', padding: '1em', fontSize: '1em' }}>
+            <ReactMarkdown>{aiFeedback || ''}</ReactMarkdown>
+          </div> */}
         </div>
       </div>
     </div>

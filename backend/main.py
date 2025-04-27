@@ -4,6 +4,8 @@ from fastapi import FastAPI, HTTPException, Request
 from fastapi.responses import JSONResponse, PlainTextResponse
 from pydantic import BaseModel, Field
 from typing import Dict, Any, List
+from fastapi.middleware.cors import CORSMiddleware
+
 
 from dotenv import load_dotenv
 
@@ -22,6 +24,15 @@ if not ANTHROPIC_API_KEY:
     # raise ValueError("ANTHROPIC_API_KEY environment variable not set.") # Optional: Keep if /generate MUST work
 
 app = FastAPI()
+
+# Allow CORS for your frontend
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:5173"],  # 👈 your frontend's URL
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 # --- Model for /generate endpoint ---
 class GenerateTextInput(BaseModel):
