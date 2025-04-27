@@ -70,7 +70,7 @@ set ANTHROPIC_API_KEY=Your Key
 cd backend 
 uvicorn main:app --reload
 ```
-Then open the browser, drag in a scenario PDF, fly the mission, and drop `mission_log.json` for instant debrief.
+Then open the browser, drag in an instructor PDF, fly the mission, and drop `mission_log.json` for instant debrief.
 
 ---
 
