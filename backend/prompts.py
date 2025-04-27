@@ -47,8 +47,6 @@ Provide a clear, structured debrief. For each identified point (elaborating on a
 * **DEBRIEF NOTE:** [Is this a critical learning point? Yes/No/Optional]
 
 Conclude with an overall assessment of mission and tactical objective achievement based on the `Mission End` log entry. If processing errors were found in the input log, list them briefly at the very end.
-
-Return the output in the format of a HTML table. 
 """
 
 PROMPT_EXTRACT_MISTAKES_SHORT = """
