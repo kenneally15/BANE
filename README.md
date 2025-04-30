@@ -57,6 +57,7 @@ https://drive.google.com/file/d/1SiPJ3YWXkQwKLGsfjZ4HTV-lc09_y5gc/view?usp=shari
 
 ## Quick Start
 ```bash
+ # Requires Python 3.13 (check with: python3 --version)
  python3 -m venv myenv
  source myenv/bin/activate
  pip install -r backend/requirements.txt
@@ -66,8 +67,8 @@ https://drive.google.com/file/d/1SiPJ3YWXkQwKLGsfjZ4HTV-lc09_y5gc/view?usp=shari
  export ANTHROPIC_API_KEY=Your Key
  uvicorn main:app --reload
 
-# Launch local web front-end
-## New terminal window / tab
+ # Launch local web front-end
+ # New terminal window / tab
  npm install
  npm run dev
 ```
