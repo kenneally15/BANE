@@ -74,7 +74,9 @@ https://drive.google.com/file/d/1SiPJ3YWXkQwKLGsfjZ4HTV-lc09_y5gc/view?usp=shari
  npm run dev
 ```
 
-Then open the browser, drag in an instructor PDF, fly the mission, and drop `mission_log.json` for instant debrief.
+Then open the browser and go to http://localhost:5173/
+Drag in an instructor PDF (see `Wargame Scenario Considerations.pdf` in repo)
+Fly the mission, and drop mission log JSON (see `scenario1.json` in repo) for instant debrief.
 
 ---
 
