@@ -75,8 +75,8 @@ https://drive.google.com/file/d/1SiPJ3YWXkQwKLGsfjZ4HTV-lc09_y5gc/view?usp=shari
 ```
 
 Then open the browser and go to http://localhost:5173/   
-Drag in an instructor PDF (see `Wargame Scenario Considerations.pdf` in repo)    
-Fly the mission, and drop mission log JSON (see `scenario1.json` in repo) for instant debrief.
+Drag in an instructor PDF (`Wargame Scenario Considerations.pdf`)    
+Fly the mission, and drop mission log JSON (`scenario1.json`) for instant debrief.
 
 ---
 
