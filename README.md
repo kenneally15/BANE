@@ -33,11 +33,11 @@
 ---
 
 ## Demo Walk-through
-* **Scenario:** INDOPACOM strike-package escort versus adversary naval group.
+**Scenario:** INDOPACOM strike-package escort versus adversary naval group.
 
-     https://drive.google.com/file/d/1SiPJ3YWXkQwKLGsfjZ4HTV-lc09_y5gc/view?usp=sharing
+https://drive.google.com/file/d/1SiPJ3YWXkQwKLGsfjZ4HTV-lc09_y5gc/view?usp=sharing
 
-     https://cerebralvalley.pixieset.com/nationalsecurityhackathon/demovideos/
+https://cerebralvalley.pixieset.com/nationalsecurityhackathon/demovideos/
 
 ---
 
