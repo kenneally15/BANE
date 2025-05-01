@@ -7,7 +7,7 @@
 ## Table of Contents
 1. [Why BANE](#why-bane)
 2. [How It Works](#how-it-works)
-3. [Demo Walk-through](#demo-walk-through)
+3. [Demo Video](#demo-video)
 4. [Key Features](#key-features)
 5. [Roadmap](#roadmap)
 6. [Quick Start](#quick-start)
@@ -32,7 +32,7 @@
 
 ---
 
-## Demo Walk-through
+## Demo Video
 **Scenario:** INDOPACOM strike-package escort versus adversary naval group.
 
 https://drive.google.com/file/d/1SiPJ3YWXkQwKLGsfjZ4HTV-lc09_y5gc/view?usp=sharing
