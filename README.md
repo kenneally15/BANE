@@ -77,7 +77,7 @@ https://cerebralvalley.pixieset.com/nationalsecurityhackathon/demovideos/
  npm run dev
 ```
 
-Then open the browser and go to http://localhost:5173/   
+Open browser and go to http://localhost:5173/   
 Drag in an instructor PDF (`Wargame Scenario Considerations.pdf`)    
 Fly the mission, and drop mission log JSON (`scenario1.json`) for instant debrief.
 
