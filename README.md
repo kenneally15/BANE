@@ -72,7 +72,6 @@ https://cerebralvalley.pixieset.com/nationalsecurityhackathon/demovideos/
  uvicorn main:app --reload
 
  # Launch local web front-end
- # New terminal window / tab
  npm install
  npm run dev
 ```
